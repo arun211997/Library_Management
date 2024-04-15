@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+</head>
+
+<body style="background-color: rgb(250, 250, 255);">
+    {% load crispy_forms_tags %}
+    {% csrf_token %}
+
+    <form method="POST" id="payment-form">
+        {{ payment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Replace with your Stripe public key
+        const stripe = Stripe('pk_test_...');
+
+        // Handle form submission and token creation
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            stripe.createToken(form)
+                .then((token) => {
+                    // Send token to your backend for processing
+                    // ...
+                })
+                .catch((error) => {
+                    // Handle errors
+                    // ...
+                });
+        });
+    </script>
+</body>
+
+</html>

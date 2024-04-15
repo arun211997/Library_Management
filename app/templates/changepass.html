@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+        }
+
+        .form {
+            width: 50vw;
+            border-radius: 10px;
+            background-color: darkslategrey;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .forms {
+            width: 100%;
+        }
+
+        #password-message {
+            display: none;
+            background-color: transparent;
+            color: #000;
+            margin-top: 10px;
+            position: relative;
+            text-align: left;
+            width: fit-content;
+        }
+
+        #password-message h3 {
+            font-size: 10px;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        #password-message p {
+            margin: 0;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .valid:before {
+            position: relative;
+            left: -10px;
+            content: "✔";
+        }
+
+        .invalid {
+            color: red;
+        }
+
+        .invalid:before {
+            position: relative;
+            left: -10px;
+            content: "✖";
+        }
+
+        /* Error message style */
+        .error-msg {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(230, 230, 237);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <form action="{%url 'usearch'%}" method="post">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Search" name="search"
+                                style="border-radius: 5px; height: 40px; width: 200px;">
+                            <button type="submit"
+                                style="border-radius: 10px; background-color: rgb(228, 228, 228);color:rgb(20, 65, 67)e;">
+                                Search
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'user'%}" style="color: aliceblue; font-weight: bold;">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile'%}" style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'issued'%}" style="color: aliceblue; font-weight: bold;">Rented Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'purchased' %}" style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'losted'%}" style="color: aliceblue; font-weight: bold;">Lost Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cartpage'%}" style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <h4 class="text-center" style="margin-top: 60px;">Change Password</h4>
+    <div class="container">
+        <div id="mydiv">
+            {% for message in messages %}
+            <h5>
+                <div class="alert mt-5"
+                    style="width:max-content; border-radius: 20px; background-color: aliceblue;color: rgb(222, 50, 84);font-size: 1rem;">
+                    {{message}}
+                </div>
+            </h5>
+            {% endfor %}
+        </div>
+        <div class="row" style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgba(1, 37, 37, 0.7);padding-top: 20px; border-radius: 10px;padding-bottom: 20px;">
+                <form action="changepwd" method="post" onsubmit="return validatepass()">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="password" id="opassword" class="form-control" name="opassword"
+                            placeholder="Old Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="npassword" name="npassword"
+                            placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, 
+                        one uppercase and lowercase letter, and at least 8 characters" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="cpassword" name="cpassword"
+                            placeholder="confirm password" required>
+                        <span style="color: rgb(247, 201, 201);" id="confirmError" class="error"></span>
+                    </div>
+                    <button type="submit"
+                        style="background-color:goldenrod; color: rgb(249, 253, 255); font-weight: bold; font-size: 1rem; text-decoration: none; border: none; height: 35px;border-radius: 10px;">Submit
+                    </button>
+                </form>
+            </div>
+            <div>
+                <div id="password-message">
+                    <h3>Password must contain:</h3>
+                    <p class="password-message-item invalid">At least
+                        <b>one lowercase letter</b>
+                    </p>
+                    <p class="password-message-item invalid">At least
+                        <b>one uppercase letter</b>
+                    </p>
+                    <p class="password-message-item invalid">At least
+                        <b>one number</b>
+                    </p>
+                    <p class="password-message-item invalid">Minimum
+                        <b>8 characters</b>
+                    </p>
+                </div>
+            </div>
+            </center>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+                // Use setTimeout to delay the execution of the fadeOut function
+                setTimeout(function () {
+                    $('#mydiv').fadeOut('fast');
+                }, 1200); // <-- time in milliseconds
+            });
+
+            var passwordInput = document.getElementById("npassword");
+            var passwordConfirm = document.getElementById("cpassword");
+            var passwordMessageItems = document.getElementsByClassName("password-message-item");
+            var passwordMessage = document.getElementById("password-message");
+
+
+            passwordInput.onfocus = function () {
+                passwordMessage.style.display = "block";
+            }
+            // After clicking outside of password input hide the message 
+            passwordInput.onblur = function () {
+                passwordMessage.style.display = "none";
+            }
+            passwordConfirm.onblur = function () {
+                passwordMessage.style.display = "none";
+            }
+
+            passwordInput.onkeyup = function () {
+                // checking uppercase letters 
+                let uppercaseRegex = /[A-Z]/g;
+                if (passwordInput.value.match(uppercaseRegex)) {
+                    passwordMessageItems[1].classList.remove("invalid");
+                    passwordMessageItems[1].classList.add("valid");
+                } else {
+                    passwordMessageItems[1].classList.remove("valid");
+                    passwordMessageItems[1].classList.add("invalid");
+                }
+
+                // checking lowercase letters 
+                let lowercaseRegex = /[a-z]/g;
+                if (passwordInput.value.match(lowercaseRegex)) {
+                    passwordMessageItems[0].classList.remove("invalid");
+                    passwordMessageItems[0].classList.add("valid");
+                } else {
+                    passwordMessageItems[0].classList.remove("valid");
+                    passwordMessageItems[0].classList.add("invalid");
+                }
+
+                // checking the number 
+                let numbersRegex = /[0-9]/g;
+                if (passwordInput.value.match(numbersRegex)) {
+                    passwordMessageItems[2].classList.remove("invalid");
+                    passwordMessageItems[2].classList.add("valid");
+                } else {
+                    passwordMessageItems[2].classList.remove("valid");
+                    passwordMessageItems[2].classList.add("invalid");
+                }
+
+                // Checking length of the password 
+                if (passwordInput.value.length >= 8) {
+                    passwordMessageItems[3].classList.remove("invalid");
+                    passwordMessageItems[3].classList.add("valid");
+                } else {
+                    passwordMessageItems[3].classList.remove("valid");
+                    passwordMessageItems[3].classList.add("invalid");
+                }
+            }
+
+            function validatepass() {
+                var newp = document.getElementById('npassword').value;
+                var confirm = document.getElementById('cpassword').value;
+
+                document.getElementById('confirmError').innerHTML = '';
+
+                if (newp != confirm) {
+                    document.getElementById('confirmError').innerHTML = 'Passwords do not match';
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </div><br>
+    <footer class="footer"
+    style="background-color: darkslategray;color: rgb(253, 254, 255);height: max-content;bottom: 0;display: flex;width: 100%;margin-top: 170px;bottom: 0;">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                <div
+                    style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>123 Library St, City, Country</p>
+                        </li>
+                        <li>
+                            <p>Email: info@example.com</p>
+                        </li>
+                        <li>
+                            <p>Phone: +123 456 7890</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled" style="color: aliceblue;">
+                    <li><a style="color: rgb(249, 251, 252);" href="#">Facebook</a></li>
+                    <li><a style="color: rgb(247, 249, 251);" href="#">Twitter</a></li>
+                    <li><a style="color: rgb(253, 254, 255);" href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+
+</html>

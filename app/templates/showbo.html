@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        li {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .collapse {
+            background-color: rgb(7, 37, 52);
+            width: 100%;
+            height: 8vh;
+            color: rgb(4, 43, 76);
+            font-size: 1vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: rgb(7, 37, 52);
+            height: max-content;
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            margin-top: -10px;
+            align-items: center;
+        }
+
+        .navi {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .navbar-nav {
+            background-color: rgb(7, 37, 52);
+            height: max-content;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .add input {
+            font-weight: bold;
+            color: black;
+        }
+        .container-fluid{
+            width: 100%;
+            height: max-content;
+            overflow: hidden;
+        }
+
+        /* .table {
+            background-color: aliceblue;
+            margin-top: -10px;
+            width:50%;
+            height: max-content;
+            font-size: 2vh;
+            overflow-x: hidden;
+            border-collapse: collapse;
+            
+        } */
+    </style>
+</head>
+
+<body style="background-color: rgb(40, 40, 44);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                style="float: left;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="logo">
+                    <a class="navbar-brand" href="#">
+                        <img src="{%static 'logo.png'%}" alt="" height="40px">
+                    </a>
+                    <h3 style="color: aliceblue;">LIBRARY</h3>
+                </div>
+                <div class="navi">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="{%url 'admin'%}"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" style="color: aliceblue; font-weight: bold;font-size: 2vh;"
+                                href="#">Add Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">New users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="{%url 'logout'%}"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header><br>
+    <div>
+
+    </div><br><br>
+    <center>
+        <div class="container-fluid">
+            <div style="background-color: aliceblue; width: 80%;">
+                <h1 style="color: rgb(133, 55, 120);">Books</Details>
+                </h1>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Genere</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Rent</th>
+                        <th>Date</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in books%}
+                    <tr>
+                        <td>{{ p.book_name}}</td>
+                        <td>{{ p.author_name}}</td>
+                        <td>{{ p.genere.ctgname}}</td>
+                        <td>{{ p.quantity}}</td>
+                        <td>{{ p.price}}</td>
+                        <td>{{ p.rent}}</td>
+                        <td>{{ p.date}}</td>
+                        <td>
+                            {% if p.image %}
+                            <img src="{{ p.image.url }}" style="height: 100px;">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if p.id %}
+                            <button class="btn" style="font-size: 1vw;"><a href="#">Edit</a></button><br>
+                            <button class="btn" style="font-size: 1vw;"><a href="#">Delete</a></button><br>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </center>
+</body>
+
+</html>

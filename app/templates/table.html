@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Responsive Table</title>
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="table-responsive">
+            <table class="table text-center ">
+                <thead>
+                    <tr style="background-color: cornflowerblue;">
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Images</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: darkgoldenrod;">
+                    {% for p in product %}
+                    <tr>
+                        <td class="pt-4">{{ p.prd_name}}</td>
+                        <td class="pt-4">{{ p.prd_price}}</td>
+                        <td class="pt-4">{{ p.prd_quantitye}}</td>
+                        <td class="pt-4">{{ p.course.ctg_name}}</td>
+                        <td>
+                            <img src="{{ p.image.url }}" class="w-25">
+                        </td>
+                        <td>
+                            <a role="button" class="btn btn-outline-dark btn-sm" href="{% url 'editpage' p.id %}">EDIT</a>
+                            <a role="button" class="btn btn-outline-dark btn-sm" href="{% url 'delete' p.id %}">DELETE</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+ <!-- <div class="lap"
+            style="background-color:rgb(12, 74, 88); display: flex;flex-direction: column; width:200px;justify-content: space-between; align-items: center;margin-bottom: 1vw; border-radius: 8px; margin-bottom: 40px;height: max-content;">
+            <div class="card"
+                style="display: flex; justify-content: center; align-items: center;width:150px;background-color:rgb(12, 74, 88);border: none; justify-content: center;">
+                <img id="l_image" src="{{ book.image.url }}" alt="" height="140vh"><br>
+            </div>
+            <div class="card"
+                style="font-size: 1rem;background-color:rgb(38, 43, 44); text-align: center; width: 200px;height: 300PX;">
+                <p style="font-weight: bold; margin-top: 5px; text-transform: uppercase;color: aliceblue;"
+                    class="text-center">
+                    {{book.book_name}}</p>
+                <div class="spec"
+                    style="text-align: left; padding-left: 22px; color: rgb(165, 217, 228);height: 120PX;">
+                    <p style="margin-top: -5px;color: aliceblue;">Author: <span
+                            style="font-weight: bold; text-align: left;color: rgb(83, 180, 200);">{{book.author_name}}</span>
+                    </p>
+                    <p style="margin-top: -10px;color: aliceblue;">Genere: <span
+                            style="font-weight: bold; text-align: left;color: rgb(83, 180, 200);">{{book.genere.ctgname}}</span>
+                    </p>
+                    <p style="margin-top: -10px;">₹ <span style="font-weight: bold; text-align: left;">{{book.rent}}</span>
+                    </p>
+                </div>
+                <div style="margin-top: 10PX;">
+                    <button style="border-radius: 5px; background-color:rgb(12, 74, 88);"><a
+                            style="text-decoration: none; color: rgb(240, 254, 255);"
+                            href="{%url 'checkout' p.id%}">Rent Now</a></button><br><br>
+                    <button style="border-radius: 5px; background-color:rgb(12, 74, 88);"><a
+                            style="text-decoration: none; color: rgb(240, 254, 255);" href="{%url 'addcart' p.id%}">Add
+                            To Cart</a></button>
+                </div>
+            </div>
+        </div> -->

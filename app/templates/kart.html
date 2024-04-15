@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+
+</head>
+
+<body style="background-color: rgb(246, 246, 255);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="user" style="color: aliceblue; font-weight: bold;">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile" style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="users" style="color: aliceblue; font-weight: bold;">Issued Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cartpage" style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout" style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <center>
+        <div class="container-fluid" style="background-color: rgb(213, 229, 232); margin-top: 50px;">
+            style="margin-left: 5px;margin-right: 5px;justify-content: space-around;align-items: center;">
+            {% for p in cart%}
+            <div class="wrapper"
+                style=" display: flex;flex-direction: column; width:30vw; align-items: center;margin-bottom: 1vw; border-radius: 8px; margin-bottom: 5px;">
+                <div class="card"
+                    style="display: flex; justify-content: center; align-items: center;width:280px;background-color:rgb(18, 81, 95);border: none; justify-content: center;">
+                    <br><img id="l_image" src="{{ p.books_id.image.url }}" alt="" height="180vh"><br>
+                </div>
+                <div class="card"
+                    style="font-size: 1rem;background-color:rgb(207, 226, 228); text-align: center; width:280px; height: 20vh;">
+                    <p style="font-weight: bold; margin-top: 5px; text-transform: uppercase;" class="text-center">
+                        {{p.books_id.book_name}}</p>
+                    <div class="spec" style="text-align: left; padding-left: 22px;">
+                        <p style="margin-top: -5px;">Author: <span
+                                style="font-weight: bold; text-align: left;">{{p.books_id.author_name}}</span></p>
+                        <p style="margin-top: -10px;">Genere: <span
+                                style="font-weight: bold; text-align: left;">{{p.books_id.genere.ctgname}}</span></p>
+                        <p style="margin-top: -10px;">₹ <span
+                                style="font-weight: bold; text-align: left;">{{p.books_id.price}}</span></p>
+                    </div>
+                    <div>
+                        <button style="border-radius: 5px; background-color:rgb(12, 74, 88);"><a
+                                style="text-decoration: none; color: rgb(240, 254, 255);" href="#">Check
+                                out</a></button><br><br>
+                    </div><br>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</body>
+
+</html>

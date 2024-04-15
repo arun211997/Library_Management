@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(230, 230, 237);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{%url 'user'%}" style="color: aliceblue; font-weight: bold;">Home
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'profile'%}"
+                            style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'issued'%}" style="color: aliceblue; font-weight: bold;">Issued
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'cartpage'%}"
+                            style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'logout'%}"
+                            style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <div class="container-fluid" style="width: 100%; display: flex; justify-content: center; align-items: center;margin-top: 60px;">
+        <div class="row"
+            style="margin-bottom: 1vw; border-radius: 8px; margin-bottom: 40px;height: max-content;width: 100%;justify-content: center;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="border: none; justify-content: center;width: 100%; display: flex;align-items: center;background-color: rgb(3, 26, 45);">
+                <img id="l_image" src="{{ book.image.url }}" alt="" height="300vh"
+                    style="margin-top: 10px;margin-bottom: 10px;">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="font-size: medium; text-align: center;display: flex;flex-direction: column;align-content: center;background-color: rgb(193, 208, 220);">
+                <div class="row"
+                    style="background-color: rgb(255, 255, 255);  height: 65px;justify-content: center;align-items: center;">
+                    <h5>Order Summary</h4>
+                </div>
+                <div class="row"
+                    style="background-color: rgb(243, 248, 247);justify-content: center;display: flex;flex-direction: column;height: 190px;border-style: solid;border-bottom: 0;border-left: 0;border-right: 0;border-width: 0.5px;border-color: rgb(22, 21, 21,0.2);align-items: center;">
+                    <div class="col" style="justify-content: center;align-items: center;display: flex;flex-direction: column;">
+                        <p style="font-weight: bold; margin-top: 5px; text-transform: uppercase;color: rgb(69, 81, 91);"
+                            class="text-center">
+                            {{book.book_name}}</p>
+                        <p style="margin-top: -5px;color: rgb(74, 90, 104);">Author: <span
+                                style="font-weight: bold; text-align: left;color: rgb(24, 102, 120);font-size: clamp(8px,1vw,24px);">{{book.author_name}}</span>
+                        </p>
+                        <p style="margin-top: -10px;color: rgb(74, 90, 104);">Genere: <span
+                                style="font-weight: bold; text-align: left;color: rgb(18, 96, 113);font-size: clamp(8px,1vw,24px);">{{book.genere.ctgname}}</span>
+                        </p>
+                        <p style="color: rgb(68, 87, 104);">Price:₹ <span
+                                style="font-weight: bold;color: rgb(36, 54, 67);">{{book.price}}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="height: 65px; border: none;">
+                    <button style="background-color:rgb(12, 74, 88);width: 100%;border: none;"><a
+                            style="text-decoration: none;color: rgb(240, 254, 255);font-family:'Geneva';font-size: large; "
+                            href="{%url 'buy' book.id %}">Place order</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            function calculateRentalCost(dailyRate, days) {
+                const rent = document.querySelector(".cartvalue")
+                const fromd = document.getElementById("fdate");
+                const tdate = document.getElementById("fdate");
+                const dailyRate = 399
+                const days = 2;
+                const totalCost = dailyRate * days
+                rent.innerHTML = totalCost;
+            }
+        </script>
+
+</body>
+
+</html>

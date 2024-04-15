@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <title>CRM Landpage</title>
+    <style>
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 3000;
+        }
+
+        ul a {
+            color: aliceblue;
+            text-decoration: none;
+        }
+
+        ul a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .openbtn {
+            color: rgb(34, 37, 39);
+            font-weight: bold;
+            font-size: 1rem;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            margin-left: 5px;
+        }
+
+        .w3-sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 2500;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 60px;
+            display: none;
+            transition: width 0.01s;
+            /* Initially hidden */
+        }
+
+        .w3-sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .w3-sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        @media (max-width: 768px) {
+            .w3-sidebar {
+                width: 150px;
+            }
+
+            #main {
+                margin-left: 150px;
+            }
+
+            #navbar {
+                margin-left: 15%;
+            }
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0;
+            margin-top: 200px;
+        }
+
+        .card {
+            transition: transform 0.1s ease-in-out;
+            /* Adding transition effect */
+            opacity: 1;
+            /* Initial opacity */
+        }
+
+        .card.dragging {
+            transform: scale(1);
+            opacity: 0;
+        }
+
+        .highlight {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body style="background-color:rgb(247, 249, 250);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(236, 239, 244); ">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: rgb(33, 37, 40);margin-left: 30PX;">CRM</a>
+        <span class="navbar-toggler-icon" onclick="w3_open()" id="openNav" style="margin-right: 30px;"></span>
+        <span class="navbar-toggler-icon" onclick="w3_close()" id="closeNav"
+            style="display: none;margin-right: 30px;"></span>
+        <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: center;align-items: center;">
+            <div style="width: 50%;align-items: baseline;;">
+                <ul class="navbar-nav ml-auto" style="justify-content: space-around;align-items: baseline;">
+                    <a class="nav-link"
+                        style="color: rgb(34, 37, 39); font-weight: bold; font-size: 1rem; outline: none; border: none; background-color: none;margin-left: 5px;"
+                        id="log" type="button" data-toggle="modal" data-target="#signinmodal">overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            style="color: rgb(34, 37, 39); font-weight: bold; font-size:medium; outline: none; border: none; background-color: none;margin-left: 5px;"
+                            id="log" type="button" data-toggle="modal" data-target="#signinmodal">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            style="color: rgb(34, 37, 39); font-weight: bold; font-size: medium; outline: none; border: none;margin-left: 5px;"
+                            id="log" type="button" class="btn" data-toggle="modal" data-target="#signupmodal">Sign
+                            In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="w3-sidebar w3-bar-block w3-collapse w3-card" style="width:200px;" id="mySidebar">
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Dashboard</a>
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Service</a>
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Contact</a>
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Overview</a>
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Features</a>
+        <a href="#" class="w3-bar-item w3-button" style="font-size: medium;">Sign in</a>
+    </div>
+    <div class="container-fluid" style="margin-top: 96px;">
+        <div class="container">
+            <h1 style="font-size: larger;">Dashboard</h1>
+            <div class="row" style="justify-content: space-between;">
+                <div class="col-md-3">
+                    <div class="row-3">
+                        <div class="card" style="background-color: rgb(59, 157, 206);border-radius: unset;">
+                            <h style="color: rgb(255, 255, 255);font-size: medium;margin-left: 10px;"> New Users</h6>
+                        </div>
+                        <div class="card" style="border-radius: unset;">
+                            <h5 style="font-size: medium;margin-left: 10px;"> 181</h5>
+                            <p style="font-size: medium;margin-left: 10px;"> Status</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row-3">
+                        <div class="card" style="background-color: rgb(59, 157, 206);border-radius: unset;">
+                            <h style="color: rgb(255, 255, 255);font-size: medium;margin-left: 10px;"> New Client</h6>
+                        </div>
+                        <div class="card" style="border-radius: unset;">
+                            <h5 style="font-size: medium;margin-left: 10px;"> 73</h5>
+                            <p style="font-size: medium;margin-left: 10px;"> Status</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row-3">
+                        <div class="card" style="background-color: rgb(59, 157, 206);border-radius: unset;">
+                            <h style="color: rgb(255, 255, 255);font-size: medium;margin-left: 10px;">Old Projects</h6>
+                        </div>
+                        <div class="card" style="border-radius: unset;">
+                            <h5 style="font-size: medium;margin-left: 10px;"> 21</h5>
+                            <p style="font-size: medium;margin-left: 10px;"> Status</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row-3">
+                        <div class="card" style="background-color: rgb(59, 157, 206);border-radius: unset;">
+                            <h style="color: rgb(255, 255, 255);font-size: medium;margin-left: 10px;"> New widgets</h6>
+                        </div>
+                        <div class="card" style="border-radius: unset;">
+                            <h5 style="font-size: medium;margin-left: 10px;"> 71</h5>
+                            <p style="font-size: medium;margin-left: 10px;"> Status</p>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+        </div><br>
+        <div class="container" style="overflow:auto;">
+            <div class="row" style="justify-content: space-around;">
+                <div class="col-md-6 col-12" style="margin-bottom:20px;">
+                    <canvas id="myChart" style="width: 800px;height: 300px;"></canvas>
+                </div>
+                <div class="col-md-3 col-12"
+                    style="margin-bottom:20px;justify-content: center;display: flex;flex-direction: column;align-items: center;background-color: rgb(247, 252, 252);border-radius: 40PX;">
+                    <span style="font-weight: bold;font-size: x-large;">Growth Percentage</span><br>
+                    <span id="growth" style="font-size:xx-large;color:rgb(59, 157, 206);font-weight: bold;"></span>
+                    <span style="font-weight: bold;font-size: large;">Monthly Growth</span>
+                </div>
+            </div><br>
+        </div>
+       
+        </div><br>
+        <div class="container">
+            <div class="row" style="justify-content: center;background-color: #3e2727;">
+                <div class="col-md-3" style="background-color: rgb(248, 250, 250);" id="dropzone1">
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;">
+                        <div class="card"
+                            style="background-color: rgb(59, 157, 206);height: 10px;border-radius: unset;"> </div>
+                        <div class="card"
+                            style="height: 70px;justify-content: center;border-radius: unset;background-color: #ffffff;">
+                            <span style="font-weight: bold;margin-left: 30px;">New Deals</span>
+                            <span style="margin-left: 30px;">$<span id="total" style="font-size: medium;"></span></span>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card2" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Instance Software</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Brailounge</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Martha Hills</span><br>
+                                <span id="value">$900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card3" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">New Widget Deal</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> THK & Bridge</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <!-- <span>$1400 Feb 21 2023</span> -->
+                                <span id="value">$1400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card4" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">New Widget Deal</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> THK & Bridge</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <!-- <span>$1400 Feb 21 2023</span> -->
+                                <span id="value">$21400</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="background-color: rgb(248, 250, 250);" id="dropzone2">
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;">
+                        <div class="card"
+                            style="background-color: rgb(59, 157, 206);height: 10px;border-radius: unset;"> </div>
+                        <div class="card" style="height: 70px;justify-content: center;border-radius: unset;">
+                            <span style="font-weight: bold;margin-left: 30px;">Value Proposition</span>
+                            <span style="margin-left: 30px;">$<span id="total" style="font-size: medium;"></span></span>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card5" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">100 Widgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px">Blue Rivers pvt</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Joanee Lee</span><br>
+                                <!-- <span>$211900 MAR 21 2023</span> -->
+                                <span id="value">$11900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card6" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Skillbox</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Skillbox ltd</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <!-- <span>$211400 Feb 21 2023</span> -->
+                                <span id="value">$711400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card7" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Instawidgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Photofeed</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Joanee Lee</span><br>
+                                <!-- <span>$2141400 Feb 21 2023</span> -->
+                                <span id="value">$80100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="background-color: rgb(248, 250, 250);" id="dropzone3">
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;">
+                        <div class="card"
+                            style="background-color: rgb(32, 199, 146);height: 10px;border-radius: unset;"> </div>
+                        <div class="card" style="height: 70px;justify-content: center;border-radius: unset;">
+                            <span style="font-weight: bold;margin-left: 30px;">Closed Won</span>
+                            <span style="margin-left: 30px;">$<span id="total" style="font-size: medium;"></span></span>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card8" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">10 widgets deal</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Tagpad</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Martha Hills</span><br>
+                                <span id="value">$215400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card9" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">vu Widget Deal</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Innotype</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <span id="value">$2588400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card10" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Insta widgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Photofeed</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Joanee lee</span><br>
+                                <span id="value">$2361400</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="background-color: rgb(248, 250, 250);justify-content: center;"
+                    id="dropzone4">
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;">
+                        <div class="card" style="background-color: rgb(247, 74, 74);height: 10px;border-radius: unset;">
+                        </div>
+                        <div class="card" style="height: 70px;justify-content: center;border-radius: unset;">
+                            <span style="font-weight: bold;margin-left: 30px;">Closed Lost</span>
+                            <span style="margin-left: 30px;">$<span id="total" style="font-size: medium;"></span></span>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card11" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Reports widgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Ozu</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <span id="value">$77900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card12" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">trello Widgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Digitube</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Amelia Burrows</span><br>
+                                <span id="value">$25400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-3" style="justify-content: center;margin-top: 10px;margin-bottom: 10px;">
+                        <div class="card" id="card13" draggable="true"
+                            style="justify-content: center;border-radius: unset;">
+                            <div style="margin: 5px 5px;">
+                                <span style="font-weight: bold; font-size: medium;">Noire Widgets</span><br>
+                                <span><img src="{% static 'c1.png' %}" alt="" width="25px"> Inoojam</span><br>
+                                <span style="font-size: medium; opacity: 0.6;">Martha hills</span><br>
+                                <span id="value">$1400</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <div class="row" id="task">
+            <div class="col-md-6" style="background-color: #ffffff;border-radius: 20px;">
+                <span style="font-weight:400;opacity: 0.8;margin-left: 20PX;">Activities</span>
+                <div class="row"
+                    style="margin-top: 10px;height: 55px;background-color: #ffffff;border-style: ridge;border-width: 1px;border-left: 0;border-right: 0;border-bottom: 0;">
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <input style="opacity: 0.6;" type="checkbox">
+                    </div>
+                    <div class="col-3" style="justify-content: left;;align-items: center;display: flex;">
+                        <span style="color: rgb(0, 102, 255);opacity: 0.8;">Prepare Quote</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="font-size: medium;" >Mark Adrewews</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="opacity: 0.7;font-size: small;">Mar 21 | 10.00 AM</span>
+                    </div>
+                </div>
+                <div class="row"
+                    style="margin-top: 10px;height: 55px;background-color: #ffffff;border-style: ridge;border-width: 1px;border-left: 0;border-right: 0;border-bottom: 0;">
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <input style="opacity: 0.6;" type="checkbox">
+                    </div>
+                    <div class="col-3" style="justify-content: left;;align-items: center;display: flex;">
+                        <span style="color: rgb(0, 102, 255);opacity: 0.8;">Prepare Quote</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="font-size: medium;" >Mark Adrewews</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="opacity: 0.7;font-size: small;">Mar 21 | 10.00 AM</span>
+                    </div>
+                </div>
+                <div class="row"
+                    style="margin-top: 10px;height: 55px;background-color: #ffffff;border-style: ridge;border-width: 1px;border-left: 0;border-right: 0;border-bottom: 0;">
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <input style="opacity: 0.6;" type="checkbox">
+                    </div>
+                    <div class="col-3" style="justify-content: left;;align-items: center;display: flex;">
+                        <span style="color: rgb(0, 102, 255);opacity: 0.8;">Prepare Quote</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="font-size: medium;" >Mark Adrewews</span>
+                    </div>
+                    <div class="col-3" style="justify-content: center;align-items: center;display: flex;">
+                        <span style="opacity: 0.7;font-size: small;">Mar 21 | 10.00 AM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="justify-content: center;align-items: center;display: flex;">
+            <div class="row" style="width: 100%;">
+                <div class="col-md-3">
+                    <h3 style="font-size: large;">Customer Services</h3>
+                    <span style="font-size: medium;opacity: 0.7;">FAQ</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Return & Refunds</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Terms & Conditions</span><br>
+                    <p style="font-size: medium;opacity: 0.7;">Privacy Policy</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 style="font-size: large;">Community</h3>
+                    <span style="font-size: medium;opacity: 0.7;">Blog</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Community</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Ideas</span><br>
+                    <p style="font-size: medium;opacity: 0.7;">Developers</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 style="font-size: large;">About</h3>
+                    <span style="font-size: medium;opacity: 0.7;">Contact</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Team</span><br>
+                    <span style="font-size: medium;opacity: 0.7;">Careers</span><br>
+                    <p style="font-size: medium;opacity: 0.7;">Services</p>
+                </div>
+                <div class="col-md-3">
+                    <h3 style="font-size: large;">Follow Us</h3>
+                    <img src="{% static 'fb.png' %}" alt="" width="45px">
+                    <img src="{% static 'y1.jpg' %}" alt="" width="45px">
+                    <img src="{% static 'i1.png' %}" alt="" width="45px"><br>
+                </div>
+            </div><br>
+    </footer>
+</body>
+<script>
+    function w3_open() {
+        var screenWidth = window.innerWidth;
+        if (screenWidth < 768) {
+            document.getElementById("openNav").style.display = "none";
+            document.getElementById("closeNav").style.display = "block";
+            document.getElementById("mySidebar").style.width = "150px";
+            document.getElementById("mySidebar").style.marginTop = "50px";
+            document.getElementById("mySidebar").style.display = "block";
+        }
+        if (screenWidth > 768) {
+            document.getElementById("openNav").style.display = "none";
+            document.getElementById("closeNav").style.display = "block";
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("mySidebar").style.marginTop = "50px";
+            document.getElementById("mySidebar").style.display = "block";
+        }
+        if (screenWidth == 768) {
+            document.getElementById("openNav").style.display = "none";
+            document.getElementById("closeNav").style.display = "block";
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("mySidebar").style.marginTop = "50px";
+            document.getElementById("mySidebar").style.display = "block";
+        }
+    }
+    function w3_close() {
+        document.getElementById("openNav").style.display = "block";
+        document.getElementById("closeNav").style.display = "none";
+        document.getElementById("mySidebar").style.display = "none";
+    }
+
+    // Store the original order of the cards when the page loads
+
+
+
+    function updateTotal(columnId) {
+        const cards = document.querySelectorAll(`#${columnId} .card`);
+        let totalValue = 0;
+        cards.forEach(card => {
+            const valueSpan = card.querySelector('#value');
+
+            if (valueSpan) {
+
+                totalValue += parseInt(valueSpan.textContent.replace(/\D/g, ''), 10);
+            }
+        });
+        const totalSpan = document.querySelector(`#${columnId} #total`);
+        if (totalSpan) {
+            totalSpan.textContent = totalValue.toLocaleString()
+        }
+    }
+    function updateAllTotals() {
+        const dropzones = document.querySelectorAll("[id^='dropzone']");
+        dropzones.forEach(dropzone => {
+            updateTotal(dropzone.id);
+        });
+    }
+    updateAllTotals();
+
+    const cards = document.querySelectorAll(".card");
+    const dropzones = document.querySelectorAll("[id^='dropzone']");
+
+    const originalOrder = [];
+    let isOrderInitialized = false; // Flag to track initialization
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            originalOrder.push(card.id);
+        });
+        isOrderInitialized = true;
+    });
+
+    // Load saved card positions from local storage
+    cards.forEach(card => {
+        card.addEventListener('dragstart', function (event) {
+            event.dataTransfer.setData('text/plain', event.target.id);
+            setTimeout(() => card.classList.add("dragging"), 0);
+        });
+        card.addEventListener("dragend", () => card.classList.remove("dragging"));
+    });
+
+
+
+
+    // Add event listener to the undo button
+
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+
+        dropzone.addEventListener('drop', function (event) {
+            event.preventDefault();
+            const cardId = event.dataTransfer.getData('text/plain');
+            const draggedCard = document.getElementById(cardId);
+            dropzone.appendChild(draggedCard);
+            draggedCard.style.marginTop = "10px";
+            draggedCard.style.marginBottom = "10px";
+            draggedCard.classList.remove("dragging");
+            const cardIndex = Array.from(dropzone.children).indexOf(draggedCard);
+            localStorage.setItem(cardId, cardIndex);
+            updateAllTotals();
+        });
+    });
+
+    function resetCardOrder() {
+        if (!isOrderInitialized) return; // Don't reset if not initialized
+
+        const container = document.querySelector(".container");
+        originalOrder.forEach(id => {
+            const card = document.getElementById(id);
+            container.appendChild(card); // Append the card to its original position
+        });
+    }
+
+    const undoButton = document.getElementById("undoButton");
+    undoButton.addEventListener("click", function () {
+        resetCardOrder();
+    });
+
+
+    // Call setCardOrder function when the page loads
+    // window.onload = function () {
+    //     setCardOrder();
+    // };
+
+</script>
+<script>
+    const xValues = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT"];
+    const yValues = [10000, 8500, 6750, 8000, 8000, 9000, 8000, 8000, 7500, 10000];
+    const barColors = "rgb(59, 157, 206)";
+
+    const sepIndex = xValues.indexOf("SEP");
+    const octIndex = xValues.indexOf("OCT");
+
+    // Get the sales values for October and November
+    const sepValue = yValues[sepIndex];
+    const octValue = yValues[octIndex];
+
+    // Calculate the growth percentage
+    const growthPercentage = ((octValue - sepValue) / sepValue) * 100;
+    growp = document.getElementById("growth")
+    growp.innerText = growthPercentage.toFixed(2) + "%";
+
+    new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: " Sales 2024"
+            }
+        }
+    });
+</script>
+
+
+</html>

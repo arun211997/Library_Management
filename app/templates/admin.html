@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 3000;
+        }
+
+        .footer {
+            background-color: darkslategray;
+            height: max-content;
+            color: aliceblue;
+            bottom: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: rgb(243, 247, 249);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'admin'%}" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'genere' %}" style="color: aliceblue; font-weight: bold;">Add
+                        genere</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'abooks'%}" style="color: aliceblue; font-weight: bold;">Add
+                        Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'showbooks'%}"
+                        style="color: aliceblue; font-weight: bold;">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users'%}" style="color: aliceblue; font-weight: bold;">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tissued'%}" style="color: aliceblue; font-weight: bold;">Rented
+                        Books</a>
+                    <div style="margin-top: -25px;margin-left: 110px;width: 15px;display: flex;justify-content:
+                        center;align-items: center;">
+                        {%if due > 0 %}
+                        <span
+                            style="color: rgb(243, 246, 248);width:40px;background-color: brown; border-radius: 50%;height: 20px;justify-content: center;display: flex;align-items: center;">{{due}}</span>
+                        {%endif%}
+                        {%if due == 0 %}
+                        <span
+                            style="color: rgb(243, 246, 248);width:40px;border-radius: 50%;height: 20px;justify-content: center;display: flex;align-items: center;visibility: hidden;"></span>
+                        {%endif%}
+
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tpurchased' %}"
+                        style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tlosted'%}" style="color: aliceblue; font-weight: bold;">Lost
+                        Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'newusers'%}" style="color: aliceblue; font-weight: bold;">New
+                        users</a>
+                    <div style="margin-top: -25px;margin-left: 80px;width: 15px;display: flex;justify-content:
+                        center;align-items: center;">
+                        {%if icount > 0 %}
+                        <span
+                            style="color: rgb(243, 246, 248);width:40px;background-color: brown; border-radius: 50%;height: 20px;justify-content: center;display: flex;align-items: center;">{{icount}}</span><br>
+                        {%endif%}
+                        {%if icount == 0 %}
+                        <span
+                            style="color: rgb(243, 246, 248);width:40px; border-radius: 50%;height: 20px;justify-content: center;display: flex;align-items: center;visibility: hidden;"></span><br>
+                        {%endif%}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout'%}" style="color: aliceblue; font-weight: bold;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h3 class="text-center" style="margin-top: 10px; color: rgb(16, 45, 45);font-weight: bold; margin-top: 60px;">
+            ADMIN PANEL</h3><br>
+        <div class="row" style="display: flex;justify-content: space-around;">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgb(17, 53, 70);font-size: medium;align-items: center;color: rgb(255, 255, 255);">
+                <h5 style="font-size: medium">USERS</h4>
+                    <div class="image"
+                        style="background-color: rgb(15, 105, 106);align-items: center;display: flex;justify-content: center;">
+                        <center>
+                            <a href="users"><img src="static/u1.png" alt=""
+                                    style="margin-top: 10px;margin-bottom: 10px;" height="135px"></a>
+                        </center>
+                    </div>
+                    <div style="background-color: rgb(212, 224, 230);align-items: center;">
+                        <center>
+                            <h4 style="color: rgb(9, 34, 56);font-weight: bold;font-size: large;">
+                                {{count}}</h6>
+                        </center>
+                    </div>
+            </div><br>
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgb(17, 53, 70);font-size: medium;align-items: center;color: rgb(255, 255, 255);">
+                <h5 style="font-size: medium">BOOKS</h4>
+                    <div class="image"
+                        style="background-color: rgb(15, 105, 106);align-items: center;display: flex;justify-content: center;">
+                        <center>
+                            <a href="showbooks"><img src="static/b5.png" alt=""
+                                    style="margin-top: 10px;margin-bottom: 10px;" height="135px"></a><br>
+                        </center>
+                    </div>
+                    <div style="background-color: rgb(212, 224, 230);align-items: center;">
+                        <center>
+                            <h4 style="color: rgb(9, 34, 56);font-weight: bold;font-size: large">
+                                {{books}}</h6>
+                        </center>
+                    </div>
+            </div>
+        </div>
+    </div><br>
+
+    </div> <br>
+    <footer class="footer" style="margin-top: 200px;">
+        <div class="container">
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                    <div style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p>123 Library St, City, Country</p>
+                            </li>
+                            <li>
+                                <p>Email: info@example.com</p>
+                            </li>
+                            <li>
+                                <p>Phone: +123 456 7890</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a style="color: aliceblue;" href="#">Facebook</a></li>
+                        <li><a style="color: aliceblue;" href="#">Twitter</a></li>
+                        <li><a style="color: aliceblue;" href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

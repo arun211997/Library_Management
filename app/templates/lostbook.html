@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+</head>
+
+<body style="background-color: rgb(250, 250, 255);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <form action="{%url 'usearch'%}" method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Search" name="search"
+                            style="border-radius: 5px; height: 40px; width: 200px;">
+                        <button type="submit"
+                            style="border-radius: 10px; background-color: rgb(228, 228, 228);color:rgb(20, 65, 67)e;">
+                            Search
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'user'%}" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile'%}" style="color: aliceblue; font-weight: bold;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'issued'%}" style="color: aliceblue; font-weight: bold;">Rented Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'purchased' %}" style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'losted'%}" style="color: aliceblue; font-weight: bold;">Lost Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cartpage'%}" style="color: aliceblue; font-weight: bold;">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}" style="color: aliceblue; font-weight: bold;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="table-responsive">
+            <table class="table text-center ">
+                <thead>
+                    <tr style="background-color: rgb(22, 30, 45); color: aliceblue;font-size: 1rem;">
+                        <th>LOST</th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                    </tr>
+                    <tr style="background-color: rgb(8, 57, 62); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genere</th>
+                        <th scope="col">Publisher ID</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Due</th>
+                        <th scope="col">Paid</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: rgb(230, 238, 238);">
+                    {% for p in lost %}
+                    <tr>
+                        <td class="pt-4">{{ p.book.book_name}}</td>
+                        <td class="pt-4">{{ p.book.author_name}}</td>
+                        <td class="pt-4">{{ p.book.genere.ctgname}}</td>
+                        <td class="pt-4">{{ p.book.publisherid}}</td>
+                        <td class="pt-4">{{ p.book.price}}</td>
+                        <td class="pt-4">{{ p.fine}}</td>
+                        <td class="pt-4">{{ p.price}}</td>
+                        <td class="pt-4">{{ p.date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="footer"
+    style="background-color: darkslategray;color: rgb(253, 254, 255);height: max-content;bottom: 0;display: flex;width: 100%;margin-top: 320px;bottom: 0;">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                <div
+                    style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>123 Library St, City, Country</p>
+                        </li>
+                        <li>
+                            <p>Email: info@example.com</p>
+                        </li>
+                        <li>
+                            <p>Phone: +123 456 7890</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled" style="color: aliceblue;">
+                    <li><a style="color: rgb(249, 251, 252);" href="#">Facebook</a></li>
+                    <li><a style="color: rgb(247, 249, 251);" href="#">Twitter</a></li>
+                    <li><a style="color: rgb(253, 254, 255);" href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Responsive Navbar with Dropdown</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: chocolate;">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">Services</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                        style="color: aliceblue; font-weight: bold; font-size: 1rem; outline: none; border: none; background-color: none;"
+                        id="log" type="button" data-toggle="modal" data-target="#signinmodal">Login</a>
+                </li>
+
+                <div class="modal" id="signinmodal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- modal heading -->
+                            <div class="modal-header"
+                                style="background-color:rgba(1, 11, 16, 0.8); justify-content: center;">
+                                <h2 class="mb-4" style="color: rgb(219, 238, 247);height: max-content;font-size: 1rem;">
+                                    Login
+                                </h2>
+                            </div>
+                            <!-- modal body -->
+                            <div class="modal-body" style="background-color:rgb(7, 37, 52); outline: none;">
+                                <center>
+                                    <form action="{% url 'log'%}" method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="username">
+                                        </div>
+                                        <button type="submit"
+                                            style="background-color:rgb(219, 238, 247); color: rgb(7, 37, 52); font-weight: bold; text-decoration: none;font-size: 1rem; height: max-content;">Submit</button>
+                                        </li>
+
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link"
+                        style="color: aliceblue; font-weight: bold; font-size: 1rem; outline: none; border: none;"
+                        id="log" type="button" class="btn" data-toggle="modal" data-target="#signupmodal">Sign
+                        Up</a>
+                </li>
+                <div class="modal" id="signupmodal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- modal heading -->
+                            <div class="modal-header" style="background-color: chocolate; justify-content: center;">
+                                <h2 class="mb-4" style="color: rgb(255, 253, 250);height: max-content;">Sign UP
+                                </h2>
+                            </div>
+                            <!-- modal body -->
+                            <div class="modal-body" style="background-color:rgb(244, 248, 250); outline: none;">
+                                <center>
+                                    <form action="{% url 'signup'%}" method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="fname"
+                                                placeholder="First Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="lname"
+                                                placeholder="Last Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="uname"
+                                                placeholder="Username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="email"
+                                                placeholder="E-mail">
+                                        </div>
+                                        <button type="submit"
+                                            style="background-color: chocolate; color: rgb(249, 253, 255); font-weight: bold; font-size: 1rem; text-decoration: none; border: none; height: 40px;">Sign
+                                            Up</button>
+                                        </li>
+                                        <!-- <div>
+                                        {% for message in messages %}
+                                        <h5><div class="alert alert-danger mt-5" style="width: max-content;">
+                                            {{message}}
+                                        </div></h5>
+                                        {% endfor %}
+                                    </div> -->
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</body>
+
+</html>

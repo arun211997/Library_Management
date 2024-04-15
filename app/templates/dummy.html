@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .add input {
+            font-weight: bold;
+            color: black;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 3000;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(9, 47, 57);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="admin" style="color: aliceblue; font-weight: bold;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="genere" style="color: aliceblue; font-weight: bold;">Add genere</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="abooks" style="color: aliceblue; font-weight: bold;">Add Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="showbooks" style="color: aliceblue; font-weight: bold;">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="users" style="color: aliceblue; font-weight: bold;">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="userissue" style="color: aliceblue; font-weight: bold;">Issued
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="newusers" style="color: aliceblue; font-weight: bold;">New users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout" style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+
+    <div class="container">
+        <h3 class="text-center" style="margin-top: 60px; color: rgb(230, 244, 244); font-weight: bold;">ADD GENERE</h4>
+    </div>
+    <center>
+        <div id=mydiv>
+            {% for message in messages %}
+            <h5>
+                <div style="color:darkslategrey;">
+                    {{ message }}
+                </div>
+            </h5>
+            {% endfor %}
+        </div>
+    </center>
+    <div class="container" style="height: 200px;">
+        <div class="row" style="display: flex; justify-content: center; align-items: center; ">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12" style="background-color: rgb(16, 9, 9,0.2);padding-top: 20px;padding-bottom: 20px;">
+                <form action="AddGenere" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="genere" required placeholder="Genere">
+                    </div>
+                    <button type="submit" class="btn"
+                        style="background-color:rgb(219, 238, 247); color: rgb(7, 37, 52); font-weight: bold;">Add</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: darkslategray; display: flex; margin-top: 350px;">
+        <div class="footer">
+            <div class="top"
+                style="display: flex; flex-direction: row; justify-content:center; align-items: center;">
+                <ul style="display: flex; flex-direction: column; color: aliceblue;">
+                    <a style="color: aliceblue;" href="">Account</li></a>
+                    <a style="color: aliceblue;" href="">Service</a>
+                    <a style="color: aliceblue;" href="">Contact</a>
+                    <a style="color: aliceblue;" href="">Email</a>
+                    <a style="color: aliceblue;" href="">careers</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Use setTimeout to delay the execution of the fadeOut function
+            setTimeout(function () {
+                $('#mydiv').fadeOut('fast');
+            }, 1200); // <-- time in milliseconds
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+</head>
+
+<body style="background-color: rgb(216, 237, 242);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="genere" style="color: aliceblue; font-weight: bold;">Add genere</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="abooks" style="color: aliceblue; font-weight: bold;">Add Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="showbooks" style="color: aliceblue; font-weight: bold;">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="users" style="color: aliceblue; font-weight: bold;">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="userissue" style="color: aliceblue; font-weight: bold;">Issued Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="newusers" style="color: aliceblue; font-weight: bold;">New users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="color: aliceblue; font-weight: bold;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="table-responsive">
+            <table class="table text-center ">
+                <thead>
+                    <tr style="background-color: rgb(22, 30, 45); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">PURCHASED</th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+            
+                    </tr>
+                    
+                    <tr style="background-color: rgb(8, 57, 62); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">Username</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genere</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Paid</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: rgb(246, 245, 242);">
+                    {% for p in buy %}
+                    <tr>
+                        <td style="font-weight: bold;" class="pt-4">{{ p.user.username}}</td>
+                        <td class="pt-4">{{ p.book.book_name}}</td>
+                        <td class="pt-4">{{ p.book.author_name}}</td>
+                        <td class="pt-4">{{ p.book.genere.ctgname}}</td>
+                        <td class="pt-4">{{ p.date}}</td>
+                        <td class="pt-4">{{ p.book.price}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table text-center ">
+                <thead>
+                    <tr style="background-color: rgb(22, 30, 45); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">RENT</th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                    </tr>
+                    <tr style="background-color: rgb(8, 57, 62); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">Username</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genere</th>
+                        <th scope="col">Rent Date</th>
+                        <th scope="col">expiry Date</th>
+                        <th scope="col">Rent paid</th>
+                        <th scope="col">Fine</th>
+                        <th scope="col">FineStatus</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: rgb(246, 245, 242);">
+                    {% for p in issue %}
+                    <tr>
+                        <td style="font-weight: bold;" class="pt-4">{{ p.user.username}}</td>
+                        <td class="pt-4">{{ p.book.book_name}}</td>
+                        <td class="pt-4">{{ p.book.author_name}}</td>
+                        <td class="pt-4">{{ p.book.genere.ctgname}}</td>
+                        <td class="pt-4">{{ p.fromdate}}</td>
+                        <td class="pt-4">{{ p.todate}}</td>
+                        <td class="pt-4">{{ p.total}}</td>
+                        <td class="pt-4">{{ p.fine}}</td>
+                        <td class="pt-4">{{ p.finestatus}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table text-center ">
+                <thead>
+                    <tr style="background-color: rgb(22, 30, 45); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">LOST</th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                        <th </th>
+                    </tr>
+                    <tr style="background-color: rgb(8, 57, 62); color: aliceblue;font-size: 1rem;">
+                        <th scope="col">Username</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genere</th>
+                        <th scope="col">Paid</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: rgb(246, 245, 242);">
+                    {% for p in lost %}
+                    <tr>
+                        <td style="font-weight: bold;" class="pt-4">{{ p.user.username}}</td>
+                        <td class="pt-4">{{ p.book.book_name}}</td>
+                        <td class="pt-4">{{ p.book.author_name}}</td>
+                        <td class="pt-4">{{ p.book.genere.ctgname}}</td>
+                        <td class="pt-4">{{ p.book.price}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: darkslategray; display: flex; margin-top: 250px;">
+        <div class="footer">
+            <div class="top" style="display: flex; flex-direction: row; justify-content:center; align-items: center;">
+                <ul style="display: flex; flex-direction: column; color: aliceblue;">
+                    <a style="color: aliceblue;" href="">Account</li></a>
+                    <a style="color: aliceblue;" href="">Service</a>
+                    <a style="color: aliceblue;" href="">Contact</a>
+                    <a style="color: aliceblue;" href="">Email</a>
+                    <a style="color: aliceblue;" href="">careers</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

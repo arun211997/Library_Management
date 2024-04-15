@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Responsive Navbar with Dropdown</title>
+</head>
+
+<style>
+    .card-deck .card a {
+        border-style: solid;
+        border-width: 0.1vw;
+        border-color: darkslategrey;
+        ;
+    }
+
+    .card-deck {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .card-deck .card {
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        width: max-content;
+    }
+
+    .card-deck .card a :hover {
+        transform: scale(1.1);
+        transition: 0.8S;
+        border-style: solid;
+        border-width: 0.1vw;
+        border-color: goldenrod;
+        ;
+    }
+
+    .footer {
+        background-color: darkslategray;
+        height: max-content;
+        color: aliceblue;
+        width: 100%;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 3000;
+    }
+
+    ul a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    ul a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+</style>
+
+<body style="background-color: rgb(249, 249, 253);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategray;">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: aliceblue; font-weight: bold;">Services</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                        style="color: aliceblue; font-weight: bold; font-size: 1rem; outline: none; border: none; background-color: none;"
+                        id="log" type="button" data-toggle="modal" data-target="#signinmodal">Login</a>
+                </li>
+
+                <div class="modal" id="signinmodal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- modal heading -->
+                            <div class="modal-header"
+                                style="background-color:goldenrod; justify-content: center;">
+                                <h2 class="mb-4" style="color: rgb(219, 238, 247);height: max-content;font-size: 1.4rem;">
+                                    Login
+                                </h2>
+                            </div>
+                            <!-- modal body -->
+                            <div class="modal-body" style="background-color:rgb(227, 235, 239); outline: none;">
+                                <center>
+                                    <div id=mydiv>
+                                        {% for message in messages %}
+                                        <h5>
+                                            <div style="color:crimson;opacity: 0.8;">
+                                                {{ message }}
+                                            </div>
+                                        </h5>
+                                        {% endfor %}
+                                    </div><br>
+                                    <form action="{% url 'log'%}" method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="username">
+                                        </div>
+                                        <button type="submit"
+                                            style="background-color:goldenrod; color: rgb(226, 235, 239); font-weight: bold; text-decoration: none;font-size: 1rem;height: 35px;border-radius: 10px; border: none;">Log In</button>
+                                        </li>
+
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link"
+                        style="color: aliceblue; font-weight: bold; font-size: 1rem; outline: none; border: none;"
+                        id="log" type="button" class="btn" data-toggle="modal" data-target="#signupmodal">Sign
+                        Up</a>
+                </li>
+                <div class="modal" id="signupmodal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- modal heading -->
+                            <div class="modal-header" style="background-color:goldenrod; justify-content: center;">
+                                <h2 class="mb-4" style="color: rgb(255, 253, 250);height: max-content;font-size: 1.4rem;">Sign UP
+                                </h2>
+                            </div>
+                            <!-- modal body -->
+                            <div class="modal-body" style="background-color:rgb(244, 248, 250); outline: none;">
+                                <center>
+                                    <form action="{% url 'signup'%}" method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="fname"
+                                                placeholder="First Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="lname"
+                                                placeholder="Last Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="uname"
+                                                placeholder="Username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="username" name="email"
+                                                placeholder="E-mail">
+                                        </div>
+                                        <button type="submit"
+                                            style="background-color:goldenrod; color: rgb(249, 253, 255); font-weight: bold; font-size: 1rem; text-decoration: none; border: none; height: 35px;border-radius: 10px;">Sign
+                                            Up</button>
+                                        </li>
+                                        <!-- <div>
+                                        {% for message in messages %}
+                                        <h5><div class="alert alert-danger mt-5" style="width: max-content;">
+                                            {{message}}
+                                        </div></h5>
+                                        {% endfor %}
+                                    </div> -->
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <center>
+        <!-- <div>
+            {% for message in messages %}
+            <h5>
+                <div class="alert mt-5"
+                    style="width:max-content; border-radius: 20px; background-color: aliceblue;color: rgb(16, 16, 71);font-size: 1rem;">
+                    {{message}}
+                </div>
+            </h5>
+            {% endfor %}
+        </div> -->
+    </center>
+    <div class="container-fluid" style="height:1500px; width: 100% ;">
+        <center>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin-top: 100px; background-color: rgb(249, 254, 249);">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-50" src="static/libra1.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-50" src="static/libra1.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-50" src="static/libra1.jpg" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div><br>
+        </center>
+        <center>
+            <div class="gallery" style="background-color: gainsboro;">
+                <h1 style="font-size: 1rem;font-family:cursive; color: aliceblue; margin-top:1vw;">New Arrival</h1>
+                <div class="card-deck" style="width:40%; height: 100%; margin-top: 2vw;">
+                    <div class="card" style="align-items: center;justify-content: center;">
+                        <a href="#"><img src="static/harry1.jpg" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry1.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                </div>
+                <div class="card-deck" style="width:40%; height: 100%; margin-top: 1vw;">
+                    <div class="card" style="align-items: center;justify-content: center;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                    <div class="card" style="align-items: center;justify-content: center;width: max-content;">
+                        <a href="#"><img src="{%static 'harry.jpg'%}" alt="" height="100%" width="100%"></a>
+                    </div>
+                </div><br>
+            </div><br>
+        </center>
+    </div>
+
+    <div class="footer">
+        <div class="top" style="display: flex; flex-direction: row; justify-content:center; align-items: center;">
+            <ul style="display: flex; flex-direction: column; color: aliceblue;">
+                <a href="">Account</li></a>
+                <a href="">Service</a>
+                <a href="">Contact</a>
+                <a href="">Email</a>
+                <a href="">careers</a>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

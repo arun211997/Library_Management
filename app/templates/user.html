@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(230, 230, 237);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{%url 'user'%}" style="color: aliceblue; font-weight: bold;">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'profile'%}" style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'issued'%}" style="color: aliceblue; font-weight: bold;">Issued Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'cartpage'%}" style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'logout'%}" style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <center>
+        <!-- <div class="container mt-4">
+            <div id=mydiv style="margin-top: 50px;">
+                {% for message in messages %}
+                <h5>
+                    <div style="color:darkslategrey;">
+                        {{ message }}
+                    </div>
+                </h5>
+                {% endfor %}
+            </div><br>
+        </div> -->
+    </center>
+    <div class="container" style="background-color: rgb(213, 229, 232);">
+        <h4 class="text-center" style="margin-top: 50px; color:rgb(12, 74, 88);">EXPLORE BOOKS!</h4>
+        <div class="row auto-mx" style="justify-content: space-around">
+            {% for p in books%}
+            <div class="lap"
+                style="background-color:rgb(12, 74, 88); display: flex;flex-direction: column; width:200px;justify-content: space-between; align-items: center;margin-bottom: 1vw; border-radius: 8px; margin-bottom: 40px;height: max-content;">
+                <div class="card"
+                    style="display: flex; justify-content: center; align-items: center;width:150px;background-color:rgb(12, 74, 88);border: none; justify-content: center;">
+                    <br><a href="{%url 'viewpage' p.id%}"><img id="l_image" src="{{ p.image.url }}" alt="" height="260vh"></a><br>
+                </div>
+                <div class="card"
+                    style="font-size: 1rem;background-color:rgb(38, 43, 44); text-align: center; width: 200px;height: 300PX;">
+                    <p style="font-weight: bold; margin-top: 5px; text-transform: uppercase;color: aliceblue;" class="text-center">
+                        {{p.book_name}}</p>
+                    <div class="spec" style="text-align: left; padding-left: 22px; color: rgb(165, 217, 228);height: 120PX;">
+                        <p style="margin-top: -5px;color: aliceblue;">Author: <span
+                                style="font-weight: bold; text-align: left;color: rgb(83, 180, 200);">{{p.author_name}}</span></p>
+                        <p style="margin-top: -10px;color: aliceblue;">Genere: <span
+                                style="font-weight: bold; text-align: left;color: rgb(83, 180, 200);">{{p.genere.ctgname}}</span></p>
+                        <p style="margin-top: -10px;">₹ <span
+                                style="font-weight: bold; text-align: left;">{{p.rent}}</span></p>
+                    </div>
+                    <div style="margin-top: 10PX;">
+                        <button style="border-radius: 5px; background-color:rgb(12, 74, 88);"><a
+                                style="text-decoration: none; color: rgb(240, 254, 255);"
+                                href="{%url 'checkout' p.id%}">Rent Now</a></button><br><br>
+                        <button style="border-radius: 5px; background-color:rgb(12, 74, 88);"><a
+                                style="text-decoration: none; color: rgb(240, 254, 255);"
+                                href="{%url 'addcart' p.id%}">Add To Cart</a></button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Use setTimeout to delay the execution of the fadeOut function
+            setTimeout(function () {
+                $('#mydiv').fadeOut('fast');
+            }, 1200); // <-- time in milliseconds
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        li {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .collapse {
+            background-color: rgb(7, 37, 52);
+            width: 100%;
+            height: 8vh;
+            color: rgb(4, 43, 76);
+            font-size: 1vw;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .navbar {
+            background-color: rgb(7, 37, 52);
+            height: max-content;
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            margin-top: -10px;
+            align-items: center;
+        }
+
+        .navi {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .navbar-nav {
+            background-color: rgb(7, 37, 52);
+            height: max-content;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .table {
+            font-size: 1vw;
+        }
+
+        .add input {
+            font-weight: bold;
+            color: black;
+        }
+
+        .container-fluid {
+            width: 100%;
+            height: max-content;
+            overflow: hidden;
+        }
+
+        .table {
+            width: 100%;
+            height: max-content;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(40, 40, 44);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                style="float: left;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="logo">
+                    <a class="navbar-brand" href="#">
+                        <img src="{%static 'logo.png'%}" alt="" height="40px">
+                    </a>
+                    <h3 style="color: aliceblue;">LIBRARY</h3>
+                </div>
+                <div class="navi">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="{%url 'admin'%}"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" style="color: aliceblue; font-weight: bold;font-size: 2vh;"
+                                href="#">Add Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="#"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">New users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="{%url 'logout'%}"
+                                style="color: aliceblue; font-weight: bold;font-size: 2vh;">logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header><br>
+    <center>
+        <div class="container-fluid" style="width: 400px;">
+            <center>
+                <div id=mydiv>
+                    {% for message in messages %}
+                    <h5>
+                        <div style="color:darkslategrey;">
+                            {{ message }}
+                        </div>
+                    </h5>
+                    {% endfor %}
+                </div><br>
+            </center><br>
+            <div class="lap" style="background-color: aliceblue; width:40%;">
+                <div class="card"
+                    style="justify-content: center; align-items: center;width:150px;background-color: aliceblue;border: none; justify-content: center;">
+                    <br><img id="l_image" src="{{ book.image.url }}" alt="" height="140vh" width="100%">
+                </div>
+                <div class="card" style="margin-left: 10px; margin-right: 10px; font-size: 1vw; ">
+                    <p style="font-weight: bold; margin-top: 5px;" class="text-center">{{ book.book_name}}</p>
+                    <div class="spec">
+                        <p>Author: <span style="font-weight: bold;">{{book.author_name}}</span></p>
+                        <p>Genere: <span style="font-weight: bold;">{{book.genere}}</span></p>
+                        <p>Rent:Rs. <span style="font-weight: bold;">{{book.rent}}</span></p>
+                    <input type="date" name="from" id="fdate" placeholder="from date"><br>
+                    <input type="date" name="to" id="ldate" placeholder="to date"><br>
+                    <p>Rent: <span style="font-weight: bold;">{{p.total_rent}}</span></p>
+
+                    <center>
+                        <div>
+                            <button style="border-radius: 5px; background-color: rgb(27, 52, 154);"><a style="text-decoration: none; color: aliceblue;" href="#">Check Out</a></button>
+                        </div><br>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+
+<script>
+    function getDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd = '0'+dd
+  } 
+
+  if(mm<10) {
+      mm = '0'+mm
+  } 
+
+  today = yyyy + '/' + mm + '/' + dd;
+  console.log(today);
+  document.getElementById("fdate").value = today;
+}
+
+
+window.onload = function() {
+  getDate();
+};
+</script>
+
+</html>

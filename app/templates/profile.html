@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 3000;
+        }
+
+        .footer {
+            background-color: darkslategray;
+            color: aliceblue;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(229, 229, 237);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <form action="{%url 'usearch'%}" method="post">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Search" name="search"
+                                style="border-radius: 5px; height: 40px; width: 200px;">
+                            <button type="submit"
+                                style="border-radius: 10px; background-color: rgb(228, 228, 228);color:rgb(20, 65, 67)e;">
+                                Search
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'user'%}" style="color: aliceblue; font-weight: bold;">Home
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile'%}"
+                            style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'issued'%}" style="color: aliceblue; font-weight: bold;">Rented
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'purchased' %}"
+                            style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'losted'%}" style="color: aliceblue; font-weight: bold;">Lost
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cartpage'%}"
+                            style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}"
+                            style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row" style="display: flex;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="background-color: rgb(107, 136, 136);">
+                <div class="image-content"
+                    style="height: 100%;display: flex;justify-content: center;align-items: center;">
+                    <div class="image" style="display: flex;justify-content: center;align-items: center;">
+                        <img src="{{user.image.url}}" alt="" width="150px">
+                    </div><br>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgb(50, 60, 74);display: flex;flex-direction: column;justify-content: center;height: 100%">
+                <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: column;">
+                    <div style="width: 100%;align-items: center;">
+                        <span style="font-size: medium;color: rgb(25, 190, 190);">username</span><br>
+                        <span
+                            style="font-size: medium; font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.user.username}}</span>
+                    </div><br>
+                    <div
+                        style="width: 100%;justify-content:baseline;display: flex;flex-direction: column;align-items: baseline;">
+                        <span style="font-size: medium;  color: rgb(25, 190, 190);">First Name</span><br>
+                        <span
+                            style="font-size: medium;font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.user.first_name}}</span>
+                    </div><br>
+                    <div style="width: 100%;">
+                        <span style="font-size: medium;color: rgb(25, 190, 190);">Last Name</span><br>
+                        <span
+                            style="font-size: medium;font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.user.last_name}}</span>
+                    </div><br>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgb(50, 60, 74);display: flex;flex-direction: column;justify-content: center;height: 100%">
+                <div
+                    style="display: flex;justify-content: center;align-items: center;flex-direction: column;height: 100%;">
+                    <div style="width: 100%" ;>
+                        <span style="font-size:medium; color: rgb(25, 190, 190);">Mail</span><br>
+                        <span
+                            style="font-size: medium;font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.user.email}}</span>
+                    </div><br>
+                    <div style="width: 100%" ;>
+                        <span style="font-size: medium;color: rgb(25, 190, 190);">Phone</span><br>
+                        <span
+                            style="font-size: medium;font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.phone}}</span>
+                    </div><br>
+                    <div style="width: 100%" ;>
+                        <span style="font-size: medium;color: rgb(25, 190, 190);">Place</span><br>
+                        <span
+                            style="font-size: medium;font-weight: bold;color: rgb(253, 254, 255);margin-top: -20px;">{{user.address}}</span>
+                    </div><br>
+                    <div style="width: 100%;">
+                        <button style="background-color: rgb(20, 97, 97);width: max-content;"><a
+                                style="color: aliceblue;text-decoration: none;font-size: medium;"
+                                href="{% url 'editpage'%}">Edit</a></button>
+                        <button style="background-color: rgb(20, 97, 97);width: max-content;"><a
+                                style="color: aliceblue;text-decoration: none;font-size: medium;"
+                                href="changepass">Change Password</a></button>
+                    </div><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer"
+        style="background-color: darkslategray;color: rgb(253, 254, 255);display: flex;width: 100%;margin-top: 320px;bottom: 0;">
+        <div class="container-fluid">
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                    <div class="row"
+                        style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p>123 Library St, City, Country</p>
+                            </li>
+                            <li>
+                                <p>Email: info@example.com</p>
+                            </li>
+                            <li>
+                                <p>Phone: +123 456 7890</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled" style="color: aliceblue;">
+                        <li><a style="color: rgb(249, 251, 252);" href="#">Facebook</a></li>
+                        <li><a style="color: rgb(247, 249, 251);" href="#">Twitter</a></li>
+                        <li><a style="color: rgb(253, 254, 255);" href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

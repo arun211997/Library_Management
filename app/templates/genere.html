@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .add input {
+            font-weight: bold;
+            color: black;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 3000;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(249, 251, 252);">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'admin'%}" style="color: aliceblue; font-weight: bold;">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'genere' %}" style="color: aliceblue; font-weight: bold;">Add
+                            genere</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'abooks'%}" style="color: aliceblue; font-weight: bold;">Add
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'showbooks'%}"
+                            style="color: aliceblue; font-weight: bold;">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users'%}" style="color: aliceblue; font-weight: bold;">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tissued'%}" style="color: aliceblue; font-weight: bold;">Rented
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tpurchased' %}"
+                            style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tlosted'%}" style="color: aliceblue; font-weight: bold;">Lost
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'newusers'%}" style="color: aliceblue; font-weight: bold;">New
+                            users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout'%}" style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+
+    <div class="container">
+        <h3 class="text-center" style="margin-top: 60px; color: rgb(16, 60, 60); font-weight: bold;">ADD GENERE</h4>
+    </div>
+    <center>
+        <div id=mydiv>
+            {% for message in messages %}
+            <h5>
+                <div style="color:darkslategrey;">
+                    {{ message }}
+                </div>
+            </h5>
+            {% endfor %}
+        </div>
+    </center>
+    <div class="container">
+        <div class="row" style="display: flex; justify-content: center; align-items: center;; ">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgba(13, 73, 73, 0.8);padding-top: 20px;padding-bottom: 20px;">
+                <form action="AddGenere" method="post" onsubmit="return validate()">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="genere" required placeholder="Genere">
+                        <span style="color: rgb(206, 185, 185);" id="genereError" class="error"></span>
+                    </div>
+                    <button type="submit" class="btn"
+                        style="background-color:rgb(219, 238, 247); color: rgb(7, 37, 52); font-weight: bold;">Add</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" style="background-color: darkslategray;color: rgb(253, 254, 255);height: max-content;bottom: 0;margin-top: 300px;display: flex;">
+        <div class="container" >
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                    <div style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p>123 Library St, City, Country</p>
+                            </li>
+                            <li>
+                                <p>Email: info@example.com</p>
+                            </li>
+                            <li>
+                                <p>Phone: +123 456 7890</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled" style="color: aliceblue;">
+                        <li><a style="color: rgb(249, 251, 252);" href="#">Facebook</a></li>
+                        <li><a style="color: rgb(247, 249, 251);" href="#">Twitter</a></li>
+                        <li><a style="color: rgb(253, 254, 255);" href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        $(document).ready(function () {
+            // Use setTimeout to delay the execution of the fadeOut function
+            setTimeout(function () {
+                $('#mydiv').fadeOut('fast');
+            }, 1200); // <-- time in milliseconds
+        });
+        function validate() {
+            const genereInput = document.getElementById('genere');
+            const genereError = document.getElementById('genereError');
+
+            genereInput.addEventListener('input', function () {
+                const value = this.value;
+                if (value.startsWith(/\d/)) {
+                    genereError.textContent = 'Genere name cannot start with a number';
+                    return false;
+                } 
+            });
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

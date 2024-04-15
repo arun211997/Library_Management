@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .container-login {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            border: 5px solid rgb(3, 18, 25, 0.3);
+            border-radius: 10px;
+            background-color: rgb(7, 37, 52);
+        }
+
+        form {
+            background-color: rgb(7, 37, 52);
+            border-radius: 40px;
+        }
+
+        .btn {
+            background-color: rgb(7, 37, 52);
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(40, 40, 44);">
+    {%extends "base.html" %}
+    {% block content %}
+    <center>
+        <div>
+            {% for message in messages %}
+            <h5>
+                <div class="alert alert-primary mt-5" style="width: 400px;">
+                    {{message}}
+                </div>
+            </h5>
+            {% endfor %}
+        </div><br>
+    </center>
+
+    <!-- Styled login form -->
+    <div class="container-login mt-4" style="background-color:rgb(7, 37, 52);outline: none; margin-top: 100px;">
+        <center>
+            <h2 class="mb-4" style="color: rgb(218, 241, 236);">Login</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label" style="color: aliceblue;">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label" style="color: aliceblue;">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn"
+                    style="background-color:rgb(219, 238, 247); color: rgb(7, 37, 52); font-weight: bold;">Submit</button>
+                </for m>
+        </center>
+    </div>
+    {%endblock%}
+</body>
+
+</html>

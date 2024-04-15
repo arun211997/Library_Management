@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Web Development Company</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="icon" href="OIP__1_-removebg-preview.png" type="image/png">
+    <style>
+        .navbar {
+            width: 100%;
+            position: fixed;
+            z-index: 3000;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategrey;">
+            <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="/static/logo.png"
+                    alt="" height="30px">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <form action="{%url 'usearch'%}" method="post">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Search" name="search"
+                                style="border-radius: 5px; height: 40px; width: 200px;">
+                            <button type="submit"
+                                style="border-radius: 10px; background-color: rgb(228, 228, 228);color:rgb(20, 65, 67)e;">
+                                Search
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'user'%}" style="color: aliceblue; font-weight: bold;">Home
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile'%}"
+                            style="color: aliceblue; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'issued'%}" style="color: aliceblue; font-weight: bold;">Rented
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'purchased' %}"
+                            style="color: aliceblue; font-weight: bold;">Purchased Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'losted'%}" style="color: aliceblue; font-weight: bold;">Lost
+                            Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cartpage'%}"
+                            style="color: aliceblue; font-weight: bold;">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}"
+                            style="color: aliceblue; font-weight: bold;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header><br>
+    <div class="container-fluid"
+        style="margin-top: 60px;width: 100%; display: flex; justify-content: center; align-items: center;">
+        <div class="row"
+            style="margin-bottom: 1vw; border-radius: 8px; margin-bottom: 40px;height: max-content;width: 100%;justify-content: center;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="border: none; justify-content: center;width: 100%; display: flex;align-items: center; flex-direction: column;justify-content: center;background-color: rgb(207, 214, 220);">
+                <img id="l_image" src="{{ rent.book.image.url }}" alt="" height="300vh"
+                    style="margin-top: 10px;margin-bottom: 10px;">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                style="background-color: rgb(234, 246, 246); width: 100%;justify-content: center;align-items: center;color: rgb(20, 22, 24);">
+                <div class="row" style="background-color: rgb(218, 225, 225); justify-content: center;display: flex;align-items: center;">
+                    <div class="col" style="display: flex;justify-content: center;flex-direction: column;">
+                        <p style="font-weight: bold;"></p>
+                        <p style="font-weight: bold; font-size: large;">RETURN BOOK</p>
+                        <span
+                            style="color: rgb(22, 121, 88);font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-weight: bold;">Book:
+                            {{rent.book.book_name}} </span><br>
+                        <Span style="color: rgb(9, 62, 57); font-weight: bold;">Rent Paid: ₹{{rent.total}}</Span><br>
+                        <Span style="color: rgb(43, 139, 121); font-weight: bold;">Total Due: ₹{{rent.fine}}</Span><br>
+                        <Span style="color: rgb(7, 36, 27); font-weight: bold;margin-top: -20PX;">Due date:
+                            {{rent.todate}}</Span><br>
+                    </div>
+                </div><br>
+                <div class="row" style="justify-content: center;display: flex;">
+                    <div class="col" style="justify-content: center; display: flex;">
+                        <button style="border: none;background-color: rgb(53, 147, 173);width: 100px;border-radius: 10px;color: aliceblue;font-size: medium;font-weight: bold;"><a href="{%url 'returndue' rent.id%}" style="text-decoration: none;color: rgb(241, 245, 248);">Return</a></button>
+                    </div>
+                    <div class="col"  style="justify-content: center; display: flex;">
+                        <button style="border: none;background-color: rgb(173, 53, 61);width: 100px;border-radius: 10px;color: aliceblue;font-size: medium;font-weight: bold;"><a href="{%url 'lost' rent.id%}" style="text-decoration: none;color: rgb(241, 245, 248);">Lost</a></button>
+                    </div><br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer"
+    style="background-color: darkslategray;color: rgb(253, 254, 255);height: max-content;bottom: 0;display: flex;width: 100%;margin-top: 150px;bottom: 0;">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                <div
+                    style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>123 Library St, City, Country</p>
+                        </li>
+                        <li>
+                            <p>Email: info@example.com</p>
+                        </li>
+                        <li>
+                            <p>Phone: +123 456 7890</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6"
+                style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled" style="color: aliceblue;">
+                    <li><a style="color: rgb(249, 251, 252);" href="#">Facebook</a></li>
+                    <li><a style="color: rgb(247, 249, 251);" href="#">Twitter</a></li>
+                    <li><a style="color: rgb(253, 254, 255);" href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        $(document).ready(function () {
+            // Use setTimeout to delay the execution of the fadeOut function
+            setTimeout(function () {
+                $('#mydiv').fadeOut('fast');
+            }, 1200); // <-- time in milliseconds
+        });
+    </script>
+</body>
+
+</html>

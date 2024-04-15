@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Responsive Navbar with Dropdown</title>
+</head>
+
+<style>
+    .lap .card .btn :hover {
+        transform: scale(1.1);
+        transition: 0.9S;
+        border-style: solid;
+        border-width: 0.1vw;
+        border-color: goldenrod;
+        ;
+    }
+
+    .container-footer {
+        background-color: darkslategray;
+        height: max-content;
+        color: aliceblue;
+        width: 100%;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 3000;
+    }
+
+    ul a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    ul a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+</style>
+
+<body style="background-color: rgb(230, 230, 237);">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkslategray; ">
+        <a class="navbar-brand" href="#" style="font-weight: bold;color: aliceblue;"><img src="static/logo.png" alt=""
+                height="30px">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <form action="{%url 'usearch'%}" method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Search" name="search"
+                            style="border-radius: 5px; height: 40px; width: 200px;">
+                        <button type="submit"
+                            style="border-radius: 10px; background-color: rgb(228, 228, 228);color:rgb(20, 65, 67)e;">
+                            Search
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="user" style="color: aliceblue; font-weight: bold;">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile" style="color: aliceblue; font-weight: bold;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="issued" style="color: aliceblue; font-weight: bold;">Issued Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cartpage" style="color: aliceblue; font-weight: bold;">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="color: aliceblue; font-weight: bold;">Logout</a>
+                </li>
+            </ul>
+    </nav>
+
+    <center>
+        <div id="mydiv">
+            {% for message in messages %}
+            <h5>
+                <div class="alert mt-5"
+                    style="width:max-content; border-radius: 20px; background-color: aliceblue;color: rgb(222, 50, 84);font-size: 1rem;">
+                    {{message}}
+                </div>
+            </h5>
+            {% endfor %}
+        </div>
+    </center>
+    <div class="container-fluid" style="width: 100% ;margin-top: 80px;background-color: rgb(213, 229, 232);">
+        <div class="container">
+            <h4 class="text-center" style="margin-top: 50px; color:rgb(15, 68, 80);">EXPLORE BOOKS!</h4>
+            <div class="row auto-mx" style="justify-content: space-around">
+                {% for p in books%}
+                <div class="lap"
+                    style="background-color:rgb(12, 74, 88); display: flex;flex-direction: column; width:200px;justify-content: space-between; align-items: center;margin-bottom: 1vw; border-radius: 8px; margin-bottom: 40px;height: max-content;">
+                    <div class="card"
+                        style="display: flex; justify-content: center; align-items: center;width:150px;background-color:rgb(12, 74, 88);border: none; justify-content: center;">
+                        <button type="button" class="btn"><a href="{%url 'viewpage' p.id%}"><img src="{{ p.image.url }}" alt="" height="220vh"></a></button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                // Use setTimeout to delay the execution of the fadeOut function
+                setTimeout(function () {
+                    $('#mydiv').fadeOut('fast');
+                }, 1200); // <-- time in milliseconds
+            });
+
+            $(document).ready(function () {
+                $(".btn").click(function () {
+                    $("#signinmodal").modal('show');
+                });
+            });
+        </script>
+    </div>
+    <div class="container-fluid" style="background-color: darkslategray; display: flex; margin-top: 550px;">
+        <div class="footer">
+            <div class="top" style="display: flex; flex-direction: row; justify-content:center; align-items: center;">
+                <ul style="display: flex; flex-direction: column; color: aliceblue;">
+                    <a style="color: aliceblue;" href="">Account</li></a>
+                    <a style="color: aliceblue;" href="">Service</a>
+                    <a style="color: aliceblue;" href="">Contact</a>
+                    <a style="color: aliceblue;" href="">Email</a>
+                    <a style="color: aliceblue;" href="">careers</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

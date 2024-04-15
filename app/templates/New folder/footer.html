@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <title>Responsive Navbar with Dropdown</title>
+</head>
+
+<style>
+    .lap .card .btn :hover {
+        transform: scale(1.1);
+        transition: 0.9S;
+        border-style: solid;
+        border-width: 0.1vw;
+        border-color: goldenrod;
+        ;
+    }
+
+    .footer {
+        background-color: darkslategray;
+        height: max-content;
+        color: aliceblue;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 3000;
+    }
+
+    ul a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    ul a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+</style>
+
+<body style="background-color: rgb(18, 36, 36);">
+    <footer class="footer">
+        <div class="container">
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column; align-self: center;">
+                    <div style="justify-content: center;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p>123 Library St, City, Country</p>
+                            </li>
+                            <li>
+                                <p>Email: info@example.com</p>
+                            </li>
+                            <li>
+                                <p>Phone: +123 456 7890</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6"
+                    style="justify-content: center;display: flex;flex-direction: column;align-items: center;">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center">© 2024 Your Library. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
